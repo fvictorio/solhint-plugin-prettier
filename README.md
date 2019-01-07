@@ -11,7 +11,7 @@ issue.
 First install the necessary packages:
 
 ```
-npm install --save-dev solhint@next solhint-plugin-prettier prettier-plugin-solidity
+npm install --save-dev solhint@next solhint-plugin-prettier prettier prettier-plugin-solidity
 ```
 
 Then add a `.solhint.json` configuration file:
