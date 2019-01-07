@@ -1,9 +1,14 @@
 {
   "name": "solhint-plugin-prettier",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
-  "keywords": ["solhint", "prettier", "plugin", "solidity"],
+  "keywords": [
+    "solhint",
+    "prettier",
+    "plugin",
+    "solidity"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
