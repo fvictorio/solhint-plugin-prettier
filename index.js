@@ -20,6 +20,7 @@ const getLocFromIndex = (text, index) => {
 
 class PrettierChecker {
   constructor(reporter, config, inputSrc, fileName) {
+    this.prettier = null
     this.ruleId = 'prettier'
     this.reporter = reporter
     this.config = config
@@ -31,12 +32,22 @@ class PrettierChecker {
     try {
       // Check for optional dependencies with the try catch
       // Prettier is expensive to load, so only load it if needed.
-      const prettier = require('prettier')
+      if (!this.prettier) {
+        this.prettier = require('prettier')
+      }
 
-      const formatted = prettier.format(this.inputSrc, {
-        filepath: this.fileName,
+      const filepath = this.fileName
+
+      const prettierRcOptions = this.prettier.resolveConfig.sync(filepath, {
+        editorconfig: true
+      })
+
+      const prettierOptions = Object.assign({}, prettierRcOptions, {
+        filepath,
         plugins: ['prettier-plugin-solidity']
       })
+
+      const formatted = this.prettier.format(this.inputSrc, prettierOptions)
 
       const differences = generateDifferences(this.inputSrc, formatted)
 
