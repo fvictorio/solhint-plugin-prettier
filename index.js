@@ -29,6 +29,10 @@ class PrettierChecker {
   }
 
   enterSourceUnit() {
+    this.SourceUnit()
+  }
+
+  SourceUnit() {
     try {
       // Check for optional dependencies with the try catch
       // Prettier is expensive to load, so only load it if needed.
