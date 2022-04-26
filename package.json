@@ -1,21 +1,17 @@
 {
-  "name": "solhint-plugin-prettier",
-  "version": "0.0.5",
+  "name": "solhint-plugin-wonderland",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "keywords": [
     "solhint",
-    "prettier",
     "plugin",
-    "solidity"
+    "solidity",
+    "wonderland"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "prettier-linter-helpers": "^1.0.0"
-  },
-  "peerDependencies": {
-    "prettier": "^1.15.0 || ^2.0.0",
-    "prettier-plugin-solidity": "^1.0.0-alpha.14"
+    "solhint": "^3.3.7"
   }
 }

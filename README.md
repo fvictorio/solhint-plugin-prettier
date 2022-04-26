@@ -1,28 +1,27 @@
-# solhint-plugin-prettier
+[![image](https://img.shields.io/npm/v/solhint-plugin-wonderland.svg?style=flat-square)](https://www.npmjs.org/package/solhint-plugin-wonderland)
 
-This [Solhint](https://github.com/protofire/solhint/) plugin lets you check that
-your solidity files are correctly formatted according to the [solidity plugin
-for Prettier](https://github.com/prettier-solidity/prettier-plugin-solidity).
-Each difference with how prettier would format it is reported as an individual
-issue.
+# solhint-plugin-wonderland
+
+This [Solhint](https://github.com/protofire/solhint/) plugin provides [Wonderland](https://github.com/defi-wonderland) custom rules.
 
 ## Setup
 
 First install the necessary packages:
 
 ```
-npm install --save-dev solhint solhint-plugin-prettier prettier prettier-plugin-solidity
+npm install --save-dev solhint solhint-plugin-wonderland
 ```
 
 Then add a `.solhint.json` configuration file:
 
 ```json
 {
-  "plugins": ["prettier"],
-  "rules": {
-    "prettier/prettier": "error"
-  }
+  "plugins": ["wonderland"]
 }
 ```
 
-This rule will emit an error for each difference between your code and how prettier-solidity would format it. You can also set it to `warning` instead of `error` if you prefer that.
+## Available rules
+
+### non-state-vars-leading-underscore
+
+This rule will alert everytime a variable defined inside a function does not have a leading underscore.
