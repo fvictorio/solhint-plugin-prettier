@@ -1,0 +1,18 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "strict": true,
+    "outDir": "lib",
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "target": "es2020"
+  },
+  "exclude": ["**/*.spec.ts"],
+  "include": ["src"]
+}

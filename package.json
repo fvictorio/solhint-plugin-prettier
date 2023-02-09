@@ -2,16 +2,49 @@
   "name": "solhint-plugin-wonderland",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
   "keywords": [
     "solhint",
     "plugin",
     "solidity",
     "wonderland"
   ],
-  "author": "",
   "license": "MIT",
+  "author": "DeFi Wonderland",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "ts-mocha test/rules/*.ts",
+    "lint:check": "prettier --check './**'",
+    "lint:fix": "sort-package-json && prettier --write './**'",
+    "exec-tests": "nyc mocha --recursive && nyc report --reporter=text-lcov | coveralls",
+    "test:coverage": "yarn run exec-tests",
+    "lint": "eslint .",
+    "docs": "node scripts/generate-rule-docs.js"
+  },
   "dependencies": {
     "solhint": "^3.3.7"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "12.1.4",
+    "@commitlint/config-conventional": "12.1.4",
+    "@types/mocha": "10.0.0",
+    "@types/node": "18.11.3",
+    "assert": "2.0.0",
+    "coveralls": "3.1.1",
+    "eslint": "8.31.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "8.6.0",
+    "eslint-plugin-import": "2.27.4",
+    "eslint-plugin-prettier": "4.2.1",
+    "markdown-table": "2.0.0",
+    "mocha": "10.2.0",
+    "mocha-lcov-reporter": "1.3.0",
+    "nyc": "15.1.0",
+    "prettier": "2.7.1",
+    "shelljs": "0.8.5",
+    "sort-package-json": "1.50.0",
+    "ts-mocha": "10.0.0",
+    "ts-node": "10.9.1",
+    "typescript": "4.7.4"
   }
 }
