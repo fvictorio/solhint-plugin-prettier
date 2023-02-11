@@ -10,6 +10,8 @@ import configObject from 'solhint/lib/config';
 import { validSeverityMap } from 'solhint/lib/config/config-validator';
 import NamedReturnValuesChecker from '../../rules/named-return-values';
 import NonStateVarsLeadingUnderscoreChecker from '../../rules/non-state-vars-leading-underscore';
+import InterfaceStartsWithIChecker from '../../rules/interface-starts-with-i';
+import InterfaceMemberOrderChecker from '../../rules/interface-member-order';
 import ImportStatementFormatChecker from '../../rules/import-statement-format';
 import ContractDataOrderChecker from '../../rules/contract-data-order';
 import StructNameCamelCaseChecker from '../../rules/struct-name-camelcase';
@@ -63,7 +65,7 @@ function coreRules(meta) {
   const { reporter, config, inputSrc, tokens } = meta;
 
   const wonderlandPluginRules = [new NamedReturnValuesChecker(reporter), new NonStateVarsLeadingUnderscoreChecker(reporter), new StructNameCamelCaseChecker(reporter), new ContractDataOrderChecker(reporter),
-    new ImportStatementFormatChecker(reporter),];
+    new ImportStatementFormatChecker(reporter), new InterfaceStartsWithIChecker(reporter), new InterfaceMemberOrderChecker(reporter)];
 
   return [
     ...bestPractises(reporter, config, inputSrc),
