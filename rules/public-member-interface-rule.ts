@@ -1,4 +1,4 @@
-module.exports = {
+export const PublicMemberInterfaceRule = {
   meta: {
     type: 'suggestion',
     docs: {
@@ -10,23 +10,23 @@ module.exports = {
     schema: [],
   },
 
-  create: function (context) {
-    let interfaces = [];
+  create: function (context: any): any {
+    let interfaces: any[] = [];
 
     return {
-      ContractStatement(node) {
+      ContractStatement(node: any) {
         if (node.contractKind === 'interface') {
           interfaces.push(node);
         }
       },
 
-      'ContractStatement:exit'(node) {
+      'ContractStatement:exit'(node: any) {
         if (node.contractKind === 'contract') {
-          const contractPublicMembers = node.subNodes.filter((member) => member.visibility === 'public');
+          const contractPublicMembers = node.subNodes.filter((member: any) => member.visibility === 'public');
 
-          contractPublicMembers.forEach((publicMember) => {
+          contractPublicMembers.forEach((publicMember: any) => {
             let isInInterface = false;
-            interfaces.forEach((contractInterface) => {
+            interfaces.forEach((contractInterface: any) => {
               if (contractInterface.subNodes.includes(publicMember)) {
                 isInInterface = true;
               }

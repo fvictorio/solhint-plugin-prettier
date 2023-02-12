@@ -8,15 +8,7 @@ import deprecations from 'solhint/lib/rules/deprecations/index';
 import miscellaneous from 'solhint/lib/rules/miscellaneous/index';
 import configObject from 'solhint/lib/config';
 import { validSeverityMap } from 'solhint/lib/config/config-validator';
-import NamedReturnValuesChecker from '../../rules/named-return-values';
-import NonStateVarsLeadingUnderscoreChecker from '../../rules/non-state-vars-leading-underscore';
-import ImmutableNameSnakeCaseChecker from '../../rules/immutable-name-snakecase';
-import InterfaceStartsWithIChecker from '../../rules/interface-starts-with-i';
-import EnumNameCamelCaseChecker from '../../rules/enum-name-camelcase';
-import InterfaceMemberOrderChecker from '../../rules/interface-member-order';
-import ImportStatementFormatChecker from '../../rules/import-statement-format';
-import ContractDataOrderChecker from '../../rules/contract-data-order';
-import StructNameCamelCaseChecker from '../../rules/struct-name-camelcase';
+import rules from '../../rules/index';
 
 const notifyRuleDeprecated = _.memoize((ruleId: String, deprecationMessage: String) => {
   const message = deprecationMessage
@@ -29,7 +21,7 @@ const notifyRuleDoesntExist = _.memoize((ruleId: String) => {
   console.warn(chalk.yellow(`[solhint] Warning: Rule '${ruleId}' doesn't exist`));
 });
 
-module.exports = function checkers(reporter, configVals, inputSrc, tokens, fileName) {
+export function checkers(reporter, configVals, inputSrc, tokens, fileName) {
   const config = configObject.from(configVals);
   const { rules } = config;
   const meta = {
@@ -61,13 +53,12 @@ module.exports = function checkers(reporter, configVals, inputSrc, tokens, fileN
   }
 
   return enabledRules;
-};
+}
 
 function coreRules(meta) {
   const { reporter, config, inputSrc, tokens } = meta;
 
-  const wonderlandPluginRules = [new NamedReturnValuesChecker(reporter), new NonStateVarsLeadingUnderscoreChecker(reporter), new StructNameCamelCaseChecker(reporter), new ContractDataOrderChecker(reporter),
-    new ImportStatementFormatChecker(reporter), new InterfaceStartsWithIChecker(reporter), new InterfaceMemberOrderChecker(reporter), new EnumNameCamelCaseChecker(reporter), new ImmutableNameSnakeCaseChecker(reporter)];
+  const wonderlandPluginRules = rules.map((rule) => new rule(reporter));
 
   return [
     ...bestPractises(reporter, config, inputSrc),

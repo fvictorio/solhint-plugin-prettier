@@ -1,9 +1,9 @@
-const BaseChecker = require('solhint/lib/rules/base-checker');
-const naming = require('solhint/lib/common/identifier-naming');
+import BaseChecker from 'solhint/lib/rules/base-checker';
+import naming from 'solhint/lib/common/identifier-naming';
 
-const DEFAULT_SEVERITY = 'warn';
+const DEFAULT_SEVERITY: string = 'warn';
 
-const ruleId = 'non-state-vars-leading-underscore';
+const ruleId: string = 'non-state-vars-leading-underscore';
 const meta = {
   type: 'naming',
   docs: {
@@ -15,7 +15,10 @@ const meta = {
   defaultSetup: [DEFAULT_SEVERITY],
 };
 
-class NonStateVarsLeadingUnderscoreChecker extends BaseChecker {
+export class NonStateVarsLeadingUnderscoreChecker extends BaseChecker implements Rule {
+  private inStateVariableDeclaration = false;
+  private inStructDefinition = false;
+
   constructor(reporter) {
     super(reporter, ruleId, meta);
   }
@@ -57,5 +60,3 @@ class NonStateVarsLeadingUnderscoreChecker extends BaseChecker {
     this.error(node, `'${name}' ${shouldHaveLeadingUnderscore ? 'should' : 'should not'} start with _`);
   }
 }
-
-module.exports = NonStateVarsLeadingUnderscoreChecker;

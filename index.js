@@ -1,3 +1,3 @@
-const NonStateVarsLeadingUnderscoreChecker = require('./rules/non-state-vars-leading-underscore')
+const NonStateVarsLeadingUnderscoreChecker = require('./rules/non-state-vars-leading-underscore');
 
-module.exports = [NonStateVarsLeadingUnderscoreChecker]
+module.exports = [NonStateVarsLeadingUnderscoreChecker];

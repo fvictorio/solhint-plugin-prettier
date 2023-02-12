@@ -1,7 +1,7 @@
 {
   "name": "solhint-plugin-wonderland",
   "version": "0.0.1",
-  "description": "",
+  "description": "DeFi Wonderland Solidity best practices Solhint plugin",
   "keywords": [
     "solhint",
     "plugin",
@@ -11,18 +11,22 @@
   "license": "MIT",
   "author": "DeFi Wonderland",
   "main": "index.js",
+  "files": [
+    "rules"
+  ],
   "scripts": {
     "build": "tsc",
-    "test": "ts-mocha test/rules/*.ts",
     "lint:check": "prettier --check './**'",
     "lint:fix": "sort-package-json && prettier --write './**'",
-    "exec-tests": "nyc mocha --recursive && nyc report --reporter=text-lcov | coveralls",
-    "test:coverage": "yarn run exec-tests",
-    "lint": "eslint .",
-    "docs": "node scripts/generate-rule-docs.js"
+    "test": "ts-mocha test/rules/*.ts",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,md,ts}": "prettier --write './**'",
+    "package.json": "sort-package-json"
   },
   "dependencies": {
-    "solhint": "^3.3.7"
+    "solhint": "3.3.7"
   },
   "devDependencies": {
     "@commitlint/cli": "12.1.4",
@@ -36,6 +40,8 @@
     "eslint-config-prettier": "8.6.0",
     "eslint-plugin-import": "2.27.4",
     "eslint-plugin-prettier": "4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.1",
     "markdown-table": "2.0.0",
     "mocha": "10.2.0",
     "mocha-lcov-reporter": "1.3.0",

@@ -1,0 +1,14 @@
+# General
+.prettierignore
+.solhintignore
+.gitignore
+*.code-workspace
+.DS_STORE
+build
+.husky
+
+# JS
+node_modules
+package-lock.json
+yarn.lock
+yarn-error.log

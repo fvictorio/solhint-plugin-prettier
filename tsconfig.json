@@ -3,16 +3,16 @@
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
-    "strict": true,
-    "outDir": "lib",
+    "strict": false,
+    "outDir": "build",
     "esModuleInterop": true,
     "module": "commonjs",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "sourceMap": true,
     "resolveJsonModule": true,
-    "target": "es2020"
+    "target": "es2020",
+    "typeRoots": ["./node_modules/@types", "./@types"]
   },
-  "exclude": ["**/*.spec.ts"],
-  "include": ["src"]
+  "include": ["@types", "rules"]
 }

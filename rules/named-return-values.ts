@@ -1,4 +1,4 @@
-const BaseChecker = require('solhint/lib/rules/base-checker');
+import BaseChecker from 'solhint/lib/rules/base-checker';
 
 const ruleId = 'named-return-values';
 const meta = {
@@ -12,18 +12,16 @@ const meta = {
   defaultSetup: 'warn',
 };
 
-class NamedReturnValuesChecker extends BaseChecker {
-  constructor(reporter) {
+export class NamedReturnValuesChecker extends BaseChecker implements Rule {
+  constructor(reporter: any) {
     super(reporter, ruleId, meta);
   }
 
-  FunctionDefinition(node) {
-    node.returnParameters.forEach((parameter) => {
+  FunctionDefinition(node: any) {
+    node.returnParameters.forEach((parameter: any) => {
       if (!parameter.name) {
         this.error(node, `Return value '${parameter.typeName.name}' in function '${node.name}' must be named`);
       }
     });
   }
 }
-
-module.exports = NamedReturnValuesChecker;
