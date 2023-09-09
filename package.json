@@ -15,7 +15,7 @@
     "prettier-linter-helpers": "^1.0.0"
   },
   "peerDependencies": {
-    "prettier": "^1.15.0 || ^2.0.0",
+    "prettier": "^3.0.0",
     "prettier-plugin-solidity": "^1.0.0-alpha.14"
   }
 }

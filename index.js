@@ -1,4 +1,7 @@
-const { showInvisibles, generateDifferences } = require('prettier-linter-helpers')
+const {
+  showInvisibles,
+  generateDifferences,
+} = require("prettier-linter-helpers")
 const { INSERT, DELETE, REPLACE } = generateDifferences
 
 const getLocFromIndex = (text, index) => {
@@ -6,7 +9,7 @@ const getLocFromIndex = (text, index) => {
   let column = 0
   let i = 0
   while (i < index) {
-    if (text[i] === '\n') {
+    if (text[i] === "\n") {
       line++
       column = 0
     } else {
@@ -21,59 +24,70 @@ const getLocFromIndex = (text, index) => {
 class PrettierChecker {
   constructor(reporter, config, inputSrc, fileName) {
     this.prettier = null
-    this.ruleId = 'prettier'
+    this.ruleId = "prettier"
     this.reporter = reporter
     this.config = config
     this.inputSrc = inputSrc
     this.fileName = fileName
   }
 
-  enterSourceUnit() {
-    this.SourceUnit()
+  async enterSourceUnit() {
+    await this.SourceUnit()
   }
 
-  SourceUnit() {
+  async SourceUnit() {
     try {
       // Check for optional dependencies with the try catch
       // Prettier is expensive to load, so only load it if needed.
       if (!this.prettier) {
-        this.prettier = require('prettier')
+        this.prettier = require("prettier")
       }
 
       const filepath = this.fileName
 
-      const prettierRcOptions = this.prettier.resolveConfig.sync(filepath, {
-        editorconfig: true
+      const prettierRcOptions = await this.prettier.resolveConfig(filepath, {
+        editorconfig: true,
       })
 
       const prettierOptions = Object.assign({}, prettierRcOptions, {
         filepath,
-        plugins: ['prettier-plugin-solidity']
+        plugins: ["prettier-plugin-solidity"],
       })
 
-      const formatted = this.prettier.format(this.inputSrc, prettierOptions)
+      const formatted = await this.prettier.format(
+        this.inputSrc,
+        prettierOptions
+      )
 
       const differences = generateDifferences(this.inputSrc, formatted)
 
-      differences.forEach(difference => {
+      differences.forEach((difference) => {
         let loc = null
         switch (difference.operation) {
           case INSERT:
             loc = getLocFromIndex(this.inputSrc, difference.offset)
-            this.errorAt(loc.line, loc.column, `Insert ${showInvisibles(difference.insertText)}`)
+            this.errorAt(
+              loc.line,
+              loc.column,
+              `Insert ${showInvisibles(difference.insertText)}`
+            )
             break
           case DELETE:
             loc = getLocFromIndex(this.inputSrc, difference.offset)
-            this.errorAt(loc.line, loc.column, `Delete ${showInvisibles(difference.deleteText)}`)
+            this.errorAt(
+              loc.line,
+              loc.column,
+              `Delete ${showInvisibles(difference.deleteText)}`
+            )
             break
           case REPLACE:
             loc = getLocFromIndex(this.inputSrc, difference.offset)
             this.errorAt(
               loc.line,
               loc.column,
-              `Replace ${showInvisibles(difference.deleteText)} with ${showInvisibles(
-                difference.insertText
-              )}`
+              `Replace ${showInvisibles(
+                difference.deleteText
+              )} with ${showInvisibles(difference.insertText)}`
             )
             break
           default:
