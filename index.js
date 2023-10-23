@@ -28,11 +28,11 @@ class PrettierChecker {
     this.fileName = fileName
   }
 
-  enterSourceUnit() {
-    this.SourceUnit()
+  async enterSourceUnit() {
+    await this.SourceUnit()
   }
 
-  SourceUnit() {
+  async SourceUnit() {
     try {
       // Check for optional dependencies with the try catch
       // Prettier is expensive to load, so only load it if needed.
@@ -42,7 +42,7 @@ class PrettierChecker {
 
       const filepath = this.fileName
 
-      const prettierRcOptions = this.prettier.resolveConfig.sync(filepath, {
+      const prettierRcOptions = await this.prettier.resolveConfig(filepath, {
         editorconfig: true
       })
 
