@@ -37,12 +37,12 @@ class PrettierChecker {
       // Check for optional dependencies with the try catch
       // Prettier is expensive to load, so only load it if needed.
       if (!this.prettier) {
-        this.prettier = require('prettier')
+        this.prettier = require('@prettier/sync')
       }
 
       const filepath = this.fileName
 
-      const prettierRcOptions = this.prettier.resolveConfig.sync(filepath, {
+      const prettierRcOptions = this.prettier.resolveConfig(filepath, {
         editorconfig: true
       })
 
